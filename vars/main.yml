@@ -1,0 +1,5 @@
+---
+
+ansible_role_hpe_spp_repo_rpmkeys:
+  - key: https://downloads.linux.hpe.com/SDR/hpePublicKey2048_key1.pub
+    fingerprint: 57446EFDE098E5C934B69C7DC208ADDE26C2B797
