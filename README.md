@@ -5,6 +5,7 @@ Installs HPE repositories for Proliant servers on the following Linux distributi
 
 <ul>
 <li>Red Hat Enterprise Linux 7
+<li>Red Hat Enterprise Linux 8
 </ul>
 
 
