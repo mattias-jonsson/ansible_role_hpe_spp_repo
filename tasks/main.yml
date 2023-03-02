@@ -1,10 +1,11 @@
 ---
 
-- name: install block
+- name: Install block.
+  when: '"HPE" in ansible_system_vendor and ansible_product_name is regex("ProLiant [a-zA-Z0-9]+ Gen[0-9]+")'
   block:
-    - name: install RPM keys
+    - name: Install RPM keys.
       become: true
-      ansible.builtin.rpm_key:  
+      ansible.builtin.rpm_key:
         state: present
         key: "{{ item.key }}"
         fingerprint: "{{ item.fingerprint }}"
@@ -12,10 +13,10 @@
 
     - name: Add HPE SPP repos
       become: true
-      yum_repository:
+      ansible.builtin.yum_repository:
         name: spp
         description: Service Pack for ProLiant
-        enabled: yes
-        baseurl: "https://downloads.linux.hpe.com/repo/spp-{{ ansible_product_name | regex_search('ProLiant [a-zA-Z0-9]+ (Gen[0-9]+)', '\\1') | join() | lower }}/RedHat/$releasever/$basearch/current/"
-        gpgcheck: yes
-  when: '"HPE" in ansible_system_vendor and ansible_product_name is regex("ProLiant [a-zA-Z0-9]+ Gen[0-9]+")'
+        enabled: true
+        baseurl: >
+          "https://downloads.linux.hpe.com/repo/spp-{{ ansible_product_name | regex_search('ProLiant [a-zA-Z0-9]+ (Gen[0-9]+)', '\\1') | join() | lower }}/RedHat/$releasever/$basearch/current/"
+        gpgcheck: true
